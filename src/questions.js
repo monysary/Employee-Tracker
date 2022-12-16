@@ -51,6 +51,19 @@ const addingEmployee = [
     }
 ];
 
+const addingRole = [
+    {
+        type: "input",
+        message: "What is the title of the new role?",
+        name: "new_role"
+    },
+    {
+        type: "input",
+        message: "What is salary of the new role?",
+        name: "new_role_salary"
+    }
+]
+
 module.exports = {
     mainPrompt,
     addingEmployee
