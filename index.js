@@ -16,6 +16,10 @@ const askMainPrompt = () => {
     inquirer.prompt(questions.mainPrompt)
     .then((res) => {
         switch (res.mainChoice) {
+            // When user selects Quit
+            case "quit":
+                console.log("EMPLOYEE TRACKER APPLICATION ENDED. GOODBYE!");
+                break;
             // When user selects View All Employee
             case "view_employee":
                 console.log(" ");
