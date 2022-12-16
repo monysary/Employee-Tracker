@@ -1,9 +1,9 @@
 // Requiring necessary tools
 require("dotenv").config();
 const inquirer = require("inquirer");
-const questions = require("./src/questions");
+const { mainPrompt, addingEmployee } = require("./src/questions");
 const cTable = require("console.table");
-const db = require("./config/connections")
+const db = require("./config/connections");
 
 // Function to start application
 const startTracker = () => {
@@ -13,8 +13,9 @@ const startTracker = () => {
 
 // Function to ask mainPrompt
 const askMainPrompt = () => {
-    inquirer.prompt(questions.mainPrompt)
+    inquirer.prompt(mainPrompt)
     .then((res) => {
+        console.log(res);
         switch (res.mainChoice) {
             // When user selects Quit
             case "quit":
@@ -72,6 +73,9 @@ const askMainPrompt = () => {
                     console.table(data);
                     askMainPrompt();
                 })
+                break;
+            case "add_employee":
+                
                 break;
         }
     })
