@@ -11,10 +11,12 @@ const startTracker = () => {
     askMainPrompt();
 }
 
+// Function to ask mainPrompt
 const askMainPrompt = () => {
     inquirer.prompt(questions.mainPrompt)
     .then((res) => {
         switch (res.mainChoice) {
+            // When user selects View All Employee
             case "view_employee":
                 console.log(" ");
                 db.query(`
@@ -36,7 +38,22 @@ const askMainPrompt = () => {
                     console.table(data);
                     askMainPrompt();
                 })
-                break
+                break;
+            // When user selects View All Roles
+            case "view_role":
+                console.log(" ");
+                db.query(`
+                SELECT role.title AS Title,
+                role.salary AS Salary,
+                department.name AS Department
+                FROM role
+                LEFT JOIN department
+                ON role.department_id = department.id;
+                `, (err, data) => {
+                    if (err) throw err;
+                    console.table(data);
+                    askMainPrompt();
+                })
         }
     })
 }
