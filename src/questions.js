@@ -62,10 +62,11 @@ const addingRole = [
         message: "What is salary of the new role?",
         name: "new_role_salary"
     }
-]
+];
 
 module.exports = {
     mainPrompt,
-    addingEmployee
+    addingEmployee,
+    addingRole
 };
 

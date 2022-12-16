@@ -4,7 +4,7 @@ const inquirer = require("inquirer");
 const { mainPrompt } = require("./src/questions");
 const cTable = require("console.table");
 const db = require("./config/connections");
-const { addEmployeeFunc } = require("./src/functions")
+const { addEmployeeFunc, addRoleFunc } = require("./src/functions")
 
 // Function to start application
 const startTracker = () => {
@@ -84,10 +84,10 @@ const askMainPrompt = () => {
                     addEmployeeFunc();
                     break;
                     
-                    // When user selects Add Role
+                // When user selects Add Role
                 case "add_role":
                     console.log(" ");
-
+                    addRoleFunc();
                     break;
             }
         })
