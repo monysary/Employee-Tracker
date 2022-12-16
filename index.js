@@ -37,27 +37,42 @@ const askMainPrompt = () => {
                     ON role.department_id = department.id
                     LEFT JOIN employee manager
                     ON manager.id = employee.manager_id;
-                    `, (err, data) => {
-                    if (err) throw err;
-                    console.table(data);
-                    askMainPrompt();
+                `, (err, data) => {
+                if (err) throw err;
+                console.table(data);
+                askMainPrompt();
                 })
                 break;
             // When user selects View All Roles
             case "view_role":
                 console.log(" ");
                 db.query(`
-                SELECT role.title AS Title,
-                role.salary AS Salary,
-                department.name AS Department
-                FROM role
-                LEFT JOIN department
-                ON role.department_id = department.id;
+                    SELECT role.id AS ID,
+                    role.title AS Title,
+                    role.salary AS Salary,
+                    department.name AS Department
+                    FROM role
+                    LEFT JOIN department
+                    ON role.department_id = department.id;
                 `, (err, data) => {
                     if (err) throw err;
                     console.table(data);
                     askMainPrompt();
                 })
+                break;
+            // When user selects View All Departments
+            case "view_department":
+                console.log(" ");
+                db.query(`
+                    SELECT department.id AS ID,
+                    department.name AS Departments
+                    FROM department;
+                `, (err, data) => {
+                    if (err) throw err;
+                    console.table(data);
+                    askMainPrompt();
+                })
+                break;
         }
     })
 }
