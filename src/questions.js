@@ -64,9 +64,18 @@ const addingRole = [
     }
 ];
 
+const addingDepartment = [
+    {
+        type: "input",
+        message: "What is the name of the new department?",
+        name: "new_department"
+    }
+]
+
 module.exports = {
     mainPrompt,
     addingEmployee,
-    addingRole
+    addingRole,
+    addingDepartment
 };
 
