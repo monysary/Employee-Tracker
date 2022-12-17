@@ -24,7 +24,7 @@ const mainPrompt = {
             value: "add_role"
         },
         {
-            name: "View all Departments",
+            name: "View All Departments",
             value: "view_department"
         },
         {
