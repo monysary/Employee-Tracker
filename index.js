@@ -13,6 +13,7 @@ const db = require("./config/connections");
 // Function to start application
 const startTracker = () => {
     console.log("-----WELCOME TO THE EMPLOYEE TRACKER!-----");
+    console.log(" ");
     askMainPrompt();
 }
 
@@ -140,6 +141,7 @@ const askMainPrompt = () => {
                                                             `, (err, data) => {
                                                                 if (err) throw err;
                                                                 console.log("-----NEW EMPLOYEE ADDED TO DATABASE!-----");
+                                                                console.log(" ");
                                                                 askMainPrompt();
                                                             })
                                                         })
@@ -188,6 +190,7 @@ const askMainPrompt = () => {
                                             `, (err, data) => {
                                                 if (err) throw err;
                                                 console.log("-----NEW ROLE ADDED TO DATABASE!-----");
+                                                console.log(" ");
                                                 askMainPrompt();
                                             })
                                         })
@@ -210,12 +213,17 @@ const askMainPrompt = () => {
                             `, (err, data) => {
                                 if (err) throw err;
                                 console.log("-----NEW DEPARTMENT ADDED TO DATABASE!-----");
+                                console.log(" ");
                                 askMainPrompt();
                             })
                         })
                     break;
 
                 // When user selects Update Employee Role
+                case "update_role":
+                    console.log(" ");
+                        
+                    break;
             }
         })
 }
