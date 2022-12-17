@@ -32,7 +32,7 @@ Once the application is launched, the user is presented with a set of actions to
 - Quit
     - This will quit and exit the application
 
-Demo video: 
+Demo video: https://drive.google.com/file/d/1xfb7JUIZj6h4U7pLyDbKAz-a6-K8tju9/view
 
 ## Credits
 N/A
