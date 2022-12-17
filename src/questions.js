@@ -76,6 +76,6 @@ module.exports = {
     mainPrompt,
     addingEmployee,
     addingRole,
-    addingDepartment
+    addingDepartment,
 };
 

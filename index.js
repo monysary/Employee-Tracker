@@ -5,7 +5,7 @@ const {
     mainPrompt,
     addingEmployee,
     addingRole,
-    addingDepartment
+    addingDepartment,
 } = require("./src/questions");
 const cTable = require("console.table");
 const db = require("./config/connections");
@@ -222,11 +222,60 @@ const askMainPrompt = () => {
                 // When user selects Update Employee Role
                 case "update_role":
                     console.log(" ");
-                        
+                    db.query(`
+                        SELECT CONCAT(employee.first_name, ' ', employee.last_name) AS name FROM employee;
+                    `, (err, data) => {
+                        if (err) throw err;
+                        const employeeName = data.map((obj) => {return obj.name});
+                        inquirer.prompt({
+                            type: "list",
+                            message: "Which employee do you want their role updated?",
+                            name: "employee_update_name",
+                            choices: employeeName
+                        })
+                            .then((res) => {
+                                const employeeUpdateName = res.employee_update_name;
+    
+                                // Updating employee role - prompting for the new role
+                                db.query(`
+                                    SELECT role.title FROM role;
+                                `, (err, data) => {
+                                    if (err) throw err;
+                                    const roleForUpdate = data.map((obj) => {return obj.title})
+                                    inquirer.prompt({
+                                        type: "list",
+                                        message: "What will be the employee's new role?",
+                                        name: "employee_update_role",
+                                        choices: roleForUpdate
+                                    })
+                                        .then((res) => {
+                                            const employeeUpdateRole = res.employee_update_role;
+    
+                                            db.query(`
+                                                SELECT role.id FROM role WHERE role.title = "${employeeUpdateRole}";
+                                            `, (err, data) => {
+                                                if (err) throw err;
+                                                const employeeUpdateRoleID = data[0].id;
+    
+                                                // Updating employee role in database
+                                                db.query(`
+                                                    UPDATE employee
+                                                    SET role_id = ${employeeUpdateRoleID}
+                                                    WHERE CONCAT(employee.first_name, ' ', employee.last_name) = "${employeeUpdateName}";
+                                                `, (err, data) => {
+                                                    if (err) throw err;
+                                                    console.log("-----EMPLOYEE'S ROLE HAS BEEN UPDATED!-----");
+                                                    console.log(" ");
+                                                    askMainPrompt();
+                                                })
+                                            })
+                                        })
+                                }) 
+                            })
+                    })
                     break;
             }
         })
 }
-
 
 startTracker();
